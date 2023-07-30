@@ -1,0 +1,10 @@
+package ${GROUP}.client.fabric;
+
+import ${GROUP}.client.${CLASS_NAME}Client;
+
+public class ${CLASS_NAME}ClientFabric {
+
+    public static void init() {
+        ${CLASS_NAME}Client.init();
+    }
+}

@@ -1,0 +1,20 @@
+package ${GROUP};
+
+#if (${HAS_RESOURCEFUL_CONFIG})
+import com.teamresourceful.resourcefulconfig.common.config.Configurator;
+import ${GROUP}.config.${CLASS_NAME}Config;
+#end
+
+public class ${CLASS_NAME} {
+
+    public static final String MOD_ID = "${MOD_ID}";
+#if (${HAS_RESOURCEFUL_CONFIG})
+    public static final Configurator CONFIGURATOR = new Configurator();
+#end
+
+    public static void init() {
+#if (${HAS_RESOURCEFUL_CONFIG})
+        CONFIGURATOR.registerConfig(${CLASS_NAME}Config.class);
+#end
+    }
+}

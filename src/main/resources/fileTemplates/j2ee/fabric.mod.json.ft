@@ -1,0 +1,53 @@
+ {
+    "schemaVersion": 1,
+    "id": "${MOD_ID}",
+    "version": "${version}",
+    "name": "${MOD_NAME}",
+    "description": "${DESCRIPTION}",
+    "authors": ["${AUTHORS}"],
+    "contributors": ["${CONTRIBUTORS}"],
+    "contact": {
+        "website": "${WEBSITE}",
+        "repo": "${REPO}",
+        "issues": "${ISSUES}"
+    },
+    "license": "${LICENSE}",
+    "icon": "icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "${GROUP}.fabric.${CLASS_NAME}Fabric::init"
+        ]
+#if (${HAS_CLIENT_CODE})
+        ,
+        "client": [
+            "${GROUP}.client.fabric.${CLASS_NAME}ClientFabric::init"
+        ]
+#end
+    },
+    "mixins": [
+        "${MOD_ID}-common.mixins.json",
+        "${MOD_ID}.mixins.json"
+    ],
+    "depends": {
+        "fabric": "*",
+        "minecraft": ">=1.20",
+        "java": ">=17"
+#if (${HAS_RESOURCEFUL_LIB})
+        ,
+        "resourcefullib": ">=${RESOURCEFUL_LIB_VERSION}"
+#end
+#if (${HAS_RESOURCEFUL_CONFIG})
+        ,
+        "resourcefulconfig": ">=${RESOURCEFUL_CONFIG_VERSION}"
+#end
+#if (${HAS_BOTARIUM})
+        ,
+        "botarium": ">=${BOTARIUM_VERSION}"
+#end
+#if (${HAS_GECKOLIB})
+        ,
+        "geckolib": ">=${GECKOLIB_VERSION}"
+#end
+  }
+}

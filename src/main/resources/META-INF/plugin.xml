@@ -1,0 +1,16 @@
+<idea-plugin>
+    <id>tech.alexnijjar.mod-template</id>
+    <name>Mod Template</name>
+    <vendor email="contact@alexnijjar.tech" url="https://www.alexnijjar.tech">Alex</vendor>
+
+    <description><![CDATA[
+    Tool for creating multiplatform mods.
+  ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <moduleBuilder builderClass="tech.alexnijjar.modtemplate.ModTemplateBuilder"/>
+    </extensions>
+</idea-plugin>

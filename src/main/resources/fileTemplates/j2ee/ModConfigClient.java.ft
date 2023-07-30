@@ -1,0 +1,8 @@
+package ${GROUP}.client.config;
+
+import com.teamresourceful.resourcefulconfig.common.annotations.Config;
+
+@Config("${MOD_ID}-client")
+public final class ${CLASS_NAME}ConfigClient {
+
+}

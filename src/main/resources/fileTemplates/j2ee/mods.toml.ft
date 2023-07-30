@@ -1,0 +1,64 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+license = "${LICENSE}"
+issueTrackerURL = "${ISSUES}"
+
+[[mods]]
+modId = "${MOD_ID}"
+version = "${version}"
+displayName = "${MOD_NAME}"
+displayURL = "${WEBSITE}"
+logoFile = "icon.png"
+authors = "${AUTHORS}"
+credits = "${CONTRIBUTORS}"
+description = "${DESCRIPTION}"
+
+[[dependencies.${MOD_ID}]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${MOD_ID}]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20,)"
+ordering = "NONE"
+side = "BOTH"
+
+#if (${HAS_RESOURCEFUL_LIB})
+[[dependencies.${MOD_ID}]]
+modId = "resourcefullib"
+mandatory = true
+versionRange = "[${RESOURCEFUL_LIB_VERSION},)"
+ordering = "NONE"
+side = "BOTH"
+#end
+
+#if (${HAS_RESOURCEFUL_CONFIG})
+[[dependencies.${MOD_ID}]]
+modId = "resourcefulconfig"
+mandatory = true
+versionRange = "[${RESOURCEFUL_CONFIG_VERSION},)"
+ordering = "NONE"
+side = "BOTH"
+#end
+
+#if (${HAS_BOTARIUM})
+[[dependencies.${MOD_ID}]]
+modId = "botarium"
+mandatory = true
+versionRange = "[${BOTARIUM_VERSION},)"
+ordering = "NONE"
+side = "BOTH"
+#end
+
+#if (${HAS_GECKOLIB})
+[[dependencies.${MOD_ID}]]
+modId = "geckolib"
+mandatory = true
+versionRange = "[${GECKOLIB_VERSION},)"
+ordering = "NONE"
+side = "BOTH"
+#end

@@ -1,0 +1,10 @@
+package ${GROUP}.fabric;
+
+import ${GROUP}.${CLASS_NAME};
+
+public class ${CLASS_NAME}Fabric {
+
+    public static void init() {
+        ${CLASS_NAME}.init();
+    }
+}

@@ -1,0 +1,15 @@
+package ${GROUP}.client;
+
+#if (${HAS_RESOURCEFUL_CONFIG})
+import ${GROUP}.${CLASS_NAME};
+import ${GROUP}.client.config.${CLASS_NAME}ConfigClient;
+#end
+
+public class ${CLASS_NAME}Client {
+
+    public static void init() {
+#if (${HAS_RESOURCEFUL_CONFIG})
+        ${CLASS_NAME}.CONFIGURATOR.registerConfig(${CLASS_NAME}ConfigClient.class);
+#end
+    }
+}

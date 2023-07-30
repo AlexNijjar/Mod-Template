@@ -1,0 +1,30 @@
+org.gradle.jvmargs=-Xmx2G
+
+enabledPlatforms=fabric,forge
+
+version=${VERSION}
+group=${GROUP}
+
+minecraftVersion=${MINECRAFT_VERSION}
+parchmentVersion=${PARCHMENT_VERSION}
+
+modMenuVersion=${MOD_MENU_VERSION}
+#if (${HAS_REI})
+reiVersion=${REI_VERSION}
+#end
+#if (${HAS_JEI})
+jeiVersion=${JEI_VERSION}
+#end
+#if (${HAS_GECKOLIB})
+geckolibVersion=${GECKOLIB_VERSION}
+#end
+
+#if (${HAS_RESOURCEFUL_LIB})
+resourcefulLibVersion=${RESOURCEFUL_LIB_VERSION}
+#end
+#if (${HAS_RESOURCEFUL_CONFIG})
+resourcefulConfigVersion=${RESOURCEFUL_CONFIG_VERSION}
+#end
+#if (${HAS_BOTARIUM})
+botariumVersion=${BOTARIUM_VERSION}
+#end

@@ -1,0 +1,2 @@
+fabricLoaderVersion=${FABRIC_LOADER_VERSION}
+fabricApiVersion=${FABRIC_API_VERSION}
