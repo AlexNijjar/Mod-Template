@@ -22,27 +22,33 @@ object VersionUtils {
                 .item(1).textContent
     }
 
-    fun modrinth(slug: String): String {
+    fun modrinth(slug: String, minecraftVersion: String): String {
+        try {
         val baseUrl = "https://api.modrinth.com/v2/project/$slug/version"
-        val queryParam = URLEncoder.encode("[\"1.20.1\"]", StandardCharsets.UTF_8.toString())
+        val queryParam = URLEncoder.encode("[\"$minecraftVersion\"]", StandardCharsets.UTF_8.toString())
         val url = URL("$baseUrl?game_versions=$queryParam")
         val reader = BufferedReader(InputStreamReader(url.openStream()))
         val response = reader.use { it.readText() }
         return JsonParser.parseString(response).asJsonArray[0].asJsonObject.getAsJsonPrimitive("version_number").asString
+        } catch (e: Exception) {
+            throw Exception("$slug does not have a $minecraftVersion version!")
+        }
     }
 
-    fun getLatestGradleVersion(): String {
+    fun gradle(): String {
         val url = URL("https://services.gradle.org/versions/current")
         val reader = BufferedReader(InputStreamReader(url.openStream()))
         val response = reader.use { it.readText() }
         return JsonParser.parseString(response).asJsonObject.getAsJsonPrimitive("version").asString
     }
 
-    fun getLatestParchmentVersion() = fetchVersion("https://ldtteam.jfrog.io/artifactory/parchmentmc-internal/org/parchmentmc/data/parchment-1.20.1/maven-metadata.xml")
+    fun parchment(minecraftVersion: String) = fetchVersion("https://ldtteam.jfrog.io/artifactory/parchmentmc-internal/org/parchmentmc/data/parchment-$minecraftVersion/maven-metadata.xml")
 
-    fun getArchLoomVersion() = fetchVersion("https://maven.architectury.dev/dev/architectury/architectury-loom/maven-metadata.xml")
+    fun archLoom() = fetchVersion("https://maven.architectury.dev/dev/architectury/architectury-loom/maven-metadata.xml")
 
-    fun getCommonAtsVersion() = fetchVersion("https://maven.resourcefulbees.com/repository/thatgravyboat/tech/thatgravyboat/commonats/maven-metadata.xml")
+    fun commonAts() = fetchVersion("https://maven.resourcefulbees.com/repository/thatgravyboat/tech/thatgravyboat/commonats/maven-metadata.xml")
 
-    fun getFabricLoaderVersion() = fetchVersion("https://maven.fabricmc.net/net/fabricmc/fabric-loader/maven-metadata.xml")
+    fun fabricLoader() = fetchVersion("https://maven.fabricmc.net/net/fabricmc/fabric-loader/maven-metadata.xml")
+
+    fun neoForge() = fetchVersion("https://maven.neoforged.net/releases/net/neoforged/neoforge/maven-metadata.xml")
 }

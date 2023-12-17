@@ -1,12 +1,8 @@
 architectury {
-    forge()
+    neoForge()
 }
 
 loom {
-    forge {
-        mixinConfig("${MOD_ID}-common.mixins.json")
-        mixinConfig("${MOD_ID}.mixins.json")
-    }
 #if (${HAS_DATAGEN})
     runs {
         create("data") {
@@ -22,19 +18,19 @@ loom {
 val common: Configuration by configurations.creating {
     configurations.compileClasspath.get().extendsFrom(this)
     configurations.runtimeClasspath.get().extendsFrom(this)
-    configurations["developmentForge"].extendsFrom(this)
+    configurations["developmentNeoForge"].extendsFrom(this)
 }
 
 dependencies {
     common(project(":common", configuration = "namedElements")) {
         isTransitive = false
     }
-    shadowCommon(project(path = ":common", configuration = "transformProductionForge")) {
+    shadowCommon(project(path = ":common", configuration = "transformProductionNeoForge")) {
         isTransitive = false
     }
 
     val minecraftVersion: String by project
-    val forgeVersion: String by project
+    val neoforgeVersion: String by project
 
-    forge(group = "net.minecraftforge", name = "forge", version = "$minecraftVersion-$forgeVersion")
+    neoForge(group = "net.neoforged", name = "neoforge", version = neoforgeVersion)
 }

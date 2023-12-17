@@ -59,23 +59,18 @@ class ModTemplateBuilder : AbstractNewProjectWizardBuilder() {
             val className = modName.replace(" ", "")
             val groupPath = group.replace(".", "/")
 
-            val gradleVersion = VersionUtils.getLatestGradleVersion()
-            val parchmentVersion = VersionUtils.getLatestParchmentVersion()
-            val archLoomVersion = VersionUtils.getArchLoomVersion()
-            val modMenuVersion = VersionUtils.modrinth("modmenu")
-            val commonAtsVersion = VersionUtils.getCommonAtsVersion()
-            val fabricLoaderVersion = VersionUtils.getFabricLoaderVersion()
-            val fabricApiVersion = VersionUtils.modrinth("fabric-api").split("+")[0]
-            val forgeVersion = "47.1.3" // Cap at 47.1.3 because Lex is a BITCH
+            val gradleVersion = VersionUtils.gradle()
+            val parchmentVersion = VersionUtils.parchment(minecraftVersion)
+            val archLoomVersion = VersionUtils.archLoom()
+            val modMenuVersion = VersionUtils.modrinth("modmenu", minecraftVersion)
+            val commonAtsVersion = VersionUtils.commonAts()
+            val fabricLoaderVersion = VersionUtils.fabricLoader()
+            val fabricApiVersion = VersionUtils.modrinth("fabric-api", minecraftVersion).split("+")[0]
 
-            val resourcefulLibVersion = VersionUtils.modrinth("resourceful-lib")
-            val resourcefulConfigVersion = VersionUtils.modrinth("resourceful-config")
-            val botariumVersion = VersionUtils.modrinth("botarium")
-            val reiVersion = VersionUtils.modrinth("rei").split("+")[0]
-            val jeiVersion = VersionUtils.modrinth("jei")
-            val geckolibVersion = VersionUtils.modrinth("geckolib")
+            // TODO: fix this to pull the correct neo version for the correct minecraft version
+            val neoForgeVersion = if (minecraftVersion == "1.20.2") "20.2.86" else VersionUtils.neoForge()
 
-            val templates = mapOf(
+            val templates = mutableMapOf(
                     "MOD_NAME" to modName,
                     "MOD_ID" to modid,
                     "GROUP" to group,
@@ -110,15 +105,27 @@ class ModTemplateBuilder : AbstractNewProjectWizardBuilder() {
                     "COMMON_ATS_VERSION" to commonAtsVersion,
                     "FABRIC_LOADER_VERSION" to fabricLoaderVersion,
                     "FABRIC_API_VERSION" to fabricApiVersion,
-                    "FORGE_VERSION" to forgeVersion,
-
-                    "RESOURCEFUL_LIB_VERSION" to resourcefulLibVersion,
-                    "RESOURCEFUL_CONFIG_VERSION" to resourcefulConfigVersion,
-                    "BOTARIUM_VERSION" to botariumVersion,
-                    "REI_VERSION" to reiVersion,
-                    "JEI_VERSION" to jeiVersion,
-                    "GECKOLIB_VERSION" to geckolibVersion,
+                    "NEO_FORGE_VERSION" to neoForgeVersion,
             )
+
+            if (resourcefulLib) {
+                templates["RESOURCEFUL_LIB_VERSION"] = VersionUtils.modrinth("resourceful-lib", minecraftVersion)
+            }
+            if (resourcefulConfig) {
+                templates["RESOURCEFUL_CONFIG_VERSION"] = VersionUtils.modrinth("resourceful-config", minecraftVersion)
+            }
+            if (botarium) {
+                templates["BOTARIUM_VERSION"] = VersionUtils.modrinth("botarium", minecraftVersion)
+            }
+            if (rei) {
+                templates["REI_VERSION"] = VersionUtils.modrinth("rei", minecraftVersion).split("+")[0]
+            }
+            if (jei) {
+                templates["JEI_VERSION"] = VersionUtils.modrinth("jei", minecraftVersion)
+            }
+            if (geckolib) {
+                templates["GECKOLIB_VERSION"] = VersionUtils.modrinth("geckolib", minecraftVersion)
+            }
 
             addAssets(StandardAssetsProvider().getGradlewAssets())
 
@@ -153,17 +160,17 @@ class ModTemplateBuilder : AbstractNewProjectWizardBuilder() {
             addTemplateAsset("fabric/run/server.properties", "server.properties", templates)
 
             // Neo Forge
-            addTemplateAsset("forge/src/main/java/$groupPath/forge/${className}Forge.java", "ForgeMain.java", templates)
-            if (clientCode) addTemplateAsset("forge/src/main/java/$groupPath/client/forge/${className}ClientForge.java", "ForgeModClient.java", templates)
-            addTemplateAsset("forge/gradle.properties", "Forge gradle.properties", templates)
-            addTemplateAsset("forge/build.gradle.kts", "Forge build.gradle.kts", templates)
-            addTemplateAsset("forge/src/main/resources/${modid}.mixins.json", "Forge mod.mixins.json", templates)
-            addTemplateAsset("forge/src/main/resources/META-INF/mods.toml", "mods.toml", templates)
-            addTemplateAsset("forge/src/main/resources/pack.mcmeta", "pack.mcmeta", templates)
-            if (datagen) addTemplateAsset("forge/src/main/java/$groupPath/datagen/${className}DataGenerator.java", "ModDataGenerator.java", templates)
-            addTemplateAsset("forge/run/options.txt", "options.txt", templates)
-            addTemplateAsset("forge/run/eula.txt", "eula.txt", templates)
-            addTemplateAsset("forge/run/server.properties", "server.properties", templates)
+            addTemplateAsset("neoforge/src/main/java/$groupPath/neoforge/${className}NeoForge.java", "NeoForgeMain.java", templates)
+            if (clientCode) addTemplateAsset("neoforge/src/main/java/$groupPath/client/neoforge/${className}ClientNeoForge.java", "NeoForgeModClient.java", templates)
+            addTemplateAsset("neoforge/gradle.properties", "NeoForge gradle.properties", templates)
+            addTemplateAsset("neoforge/build.gradle.kts", "NeoForge build.gradle.kts", templates)
+            addTemplateAsset("neoforge/src/main/resources/${modid}.mixins.json", "NeoForge mod.mixins.json", templates)
+            addTemplateAsset("neoforge/src/main/resources/META-INF/mods.toml", "mods.toml", templates)
+            addTemplateAsset("neoforge/src/main/resources/pack.mcmeta", "pack.mcmeta", templates)
+            if (datagen) addTemplateAsset("neoforge/src/main/java/$groupPath/datagen/${className}DataGenerator.java", "ModDataGenerator.java", templates)
+            addTemplateAsset("neoforge/run/options.txt", "options.txt", templates)
+            addTemplateAsset("neoforge/run/eula.txt", "eula.txt", templates)
+            addTemplateAsset("neoforge/run/server.properties", "server.properties", templates)
         }
     }
 }
