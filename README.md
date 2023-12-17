@@ -1,6 +1,6 @@
 # Mod Template
 
-An 1.20.2+ IntelliJ template for generating Architectury fabric and neoforge mods.
+A 1.20.2+ IntelliJ template for generating Architectury fabric and neoforge mods.
 
 TODO:
 - fabric.mod.json dependencies are formatted incorrectly

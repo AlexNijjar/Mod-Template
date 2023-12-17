@@ -24,12 +24,12 @@ object VersionUtils {
 
     fun modrinth(slug: String, minecraftVersion: String): String {
         try {
-        val baseUrl = "https://api.modrinth.com/v2/project/$slug/version"
-        val queryParam = URLEncoder.encode("[\"$minecraftVersion\"]", StandardCharsets.UTF_8.toString())
-        val url = URL("$baseUrl?game_versions=$queryParam")
-        val reader = BufferedReader(InputStreamReader(url.openStream()))
-        val response = reader.use { it.readText() }
-        return JsonParser.parseString(response).asJsonArray[0].asJsonObject.getAsJsonPrimitive("version_number").asString
+            val baseUrl = "https://api.modrinth.com/v2/project/$slug/version"
+            val queryParam = URLEncoder.encode("[\"$minecraftVersion\"]", StandardCharsets.UTF_8.toString())
+            val url = URL("$baseUrl?game_versions=$queryParam")
+            val reader = BufferedReader(InputStreamReader(url.openStream()))
+            val response = reader.use { it.readText() }
+            return JsonParser.parseString(response).asJsonArray[0].asJsonObject.getAsJsonPrimitive("version_number").asString
         } catch (e: Exception) {
             throw Exception("$slug does not have a $minecraftVersion version!")
         }
