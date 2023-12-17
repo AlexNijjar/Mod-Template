@@ -63,7 +63,7 @@ class ModTemplateBuilder : AbstractNewProjectWizardBuilder() {
             val parchmentVersion = VersionUtils.parchment(minecraftVersion)
             val archLoomVersion = VersionUtils.archLoom()
             val modMenuVersion = VersionUtils.modrinth("modmenu", minecraftVersion)
-            val commonAtsVersion = VersionUtils.commonAts()
+            val commonAtsVersion = "2.0"
             val fabricLoaderVersion = VersionUtils.fabricLoader()
             val fabricApiVersion = VersionUtils.modrinth("fabric-api", minecraftVersion).split("+")[0]
 

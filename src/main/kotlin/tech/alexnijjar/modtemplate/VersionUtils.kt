@@ -46,8 +46,6 @@ object VersionUtils {
 
     fun archLoom() = fetchVersion("https://maven.architectury.dev/dev/architectury/architectury-loom/maven-metadata.xml")
 
-    fun commonAts() = fetchVersion("https://maven.resourcefulbees.com/repository/thatgravyboat/tech/thatgravyboat/commonats/maven-metadata.xml")
-
     fun fabricLoader() = fetchVersion("https://maven.fabricmc.net/net/fabricmc/fabric-loader/maven-metadata.xml")
 
     fun neoForge() = fetchVersion("https://maven.neoforged.net/releases/net/neoforged/neoforge/maven-metadata.xml")
