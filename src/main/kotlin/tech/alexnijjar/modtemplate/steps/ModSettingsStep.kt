@@ -21,6 +21,9 @@ class ModSettingsStep(parent: AbstractNewProjectWizardStep) : AbstractNewProject
     private val versionProperty = propertyGraph.property("1.0.0")
         .bindStorage("${javaClass.name}.version")
 
+    private val minecraftVersionProperty = propertyGraph.property("1.20.1")
+        .bindStorage("${javaClass.name}.minecraftVersion")
+
     private val licenseProperty = propertyGraph.property("MIT")
         .bindStorage("${javaClass.name}.license")
 
@@ -70,6 +73,7 @@ class ModSettingsStep(parent: AbstractNewProjectWizardStep) : AbstractNewProject
     val modId by modIdProperty
     val group by groupProperty
     val version by versionProperty
+    val minecraftVersion by minecraftVersionProperty
     val license by licenseProperty
     val description by descriptionProperty
     val authors by authorsProperty
@@ -116,6 +120,14 @@ class ModSettingsStep(parent: AbstractNewProjectWizardStep) : AbstractNewProject
             row("Version:") {
                 textField()
                     .bindText(versionProperty)
+                    .columns(COLUMNS_MEDIUM)
+                    .validationRequestor(WHEN_GRAPH_PROPAGATION_FINISHED(propertyGraph))
+                    .textValidation(CHECK_NON_EMPTY)
+            }
+
+            row("Minecraft Version:") {
+                textField()
+                    .bindText(minecraftVersionProperty)
                     .columns(COLUMNS_MEDIUM)
                     .validationRequestor(WHEN_GRAPH_PROPAGATION_FINISHED(propertyGraph))
                     .textValidation(CHECK_NON_EMPTY)

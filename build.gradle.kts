@@ -1,7 +1,7 @@
 plugins {
     java
-    kotlin("jvm") version "1.9.0"
-    id("org.jetbrains.intellij") version "1.15.0"
+    kotlin("jvm") version "2.0.0-Beta2"
+    id("org.jetbrains.intellij") version "1.16.1"
 }
 
 repositories {
@@ -29,8 +29,8 @@ tasks {
     }
 
     patchPluginXml {
-        sinceBuild.set("222")
-        untilBuild.set("232.*")
+        sinceBuild.set("233")
+        untilBuild.set("233.*")
     }
 
     signPlugin {

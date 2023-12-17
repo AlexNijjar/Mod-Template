@@ -36,6 +36,7 @@ class ModTemplateBuilder : AbstractNewProjectWizardBuilder() {
             val modid = parent.modId
             val group = parent.group
             val version = parent.version
+            val minecraftVersion = parent.minecraftVersion
 
             val license = parent.license
             val description = parent.description
@@ -59,27 +60,27 @@ class ModTemplateBuilder : AbstractNewProjectWizardBuilder() {
             val groupPath = group.replace(".", "/")
 
             val gradleVersion = VersionUtils.getLatestGradleVersion()
-            val minecraftVersion = "1.20.1"
             val parchmentVersion = VersionUtils.getLatestParchmentVersion()
             val archLoomVersion = VersionUtils.getArchLoomVersion()
-            val modMenuVersion = VersionUtils.getModMenuVersion()
+            val modMenuVersion = VersionUtils.modrinth("modmenu")
             val commonAtsVersion = VersionUtils.getCommonAtsVersion()
             val fabricLoaderVersion = VersionUtils.getFabricLoaderVersion()
-            val fabricApiVersion = VersionUtils.getFabricApiVersion()
+            val fabricApiVersion = VersionUtils.modrinth("fabric-api").split("+")[0]
             val forgeVersion = "47.1.3" // Cap at 47.1.3 because Lex is a BITCH
 
-            val resourcefulLibVersion = VersionUtils.getResourcefulLibVersion()
-            val resourcefulConfigVersion = VersionUtils.getResourcefulConfigVersion()
-            val botariumVersion = VersionUtils.getBotariumVersion()
-            val reiVersion = VersionUtils.getReiVersion()
-            val jeiVersion = VersionUtils.getJeiVersion()
-            val geckolibVersion = VersionUtils.getGeckoLibVersion()
+            val resourcefulLibVersion = VersionUtils.modrinth("resourceful-lib")
+            val resourcefulConfigVersion = VersionUtils.modrinth("resourceful-config")
+            val botariumVersion = VersionUtils.modrinth("botarium")
+            val reiVersion = VersionUtils.modrinth("rei").split("+")[0]
+            val jeiVersion = VersionUtils.modrinth("jei")
+            val geckolibVersion = VersionUtils.modrinth("geckolib")
 
             val templates = mapOf(
                     "MOD_NAME" to modName,
                     "MOD_ID" to modid,
                     "GROUP" to group,
                     "VERSION" to version,
+                    "MINECRAFT_VERSION" to minecraftVersion,
 
                     "LICENSE" to license,
                     "DESCRIPTION" to description,
@@ -103,7 +104,6 @@ class ModTemplateBuilder : AbstractNewProjectWizardBuilder() {
                     "GROUP_PATH" to groupPath,
 
                     "GRADLE_VERSION" to gradleVersion,
-                    "MINECRAFT_VERSION" to minecraftVersion,
                     "PARCHMENT_VERSION" to parchmentVersion,
                     "ARCH_LOOM_VERSION" to archLoomVersion,
                     "MOD_MENU_VERSION" to modMenuVersion,
@@ -152,7 +152,7 @@ class ModTemplateBuilder : AbstractNewProjectWizardBuilder() {
             addTemplateAsset("fabric/run/eula.txt", "eula.txt", templates)
             addTemplateAsset("fabric/run/server.properties", "server.properties", templates)
 
-            // Forge
+            // Neo Forge
             addTemplateAsset("forge/src/main/java/$groupPath/forge/${className}Forge.java", "ForgeMain.java", templates)
             if (clientCode) addTemplateAsset("forge/src/main/java/$groupPath/client/forge/${className}ClientForge.java", "ForgeModClient.java", templates)
             addTemplateAsset("forge/gradle.properties", "Forge gradle.properties", templates)
