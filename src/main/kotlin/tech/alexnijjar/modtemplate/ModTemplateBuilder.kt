@@ -68,7 +68,7 @@ class ModTemplateBuilder : AbstractNewProjectWizardBuilder() {
             val fabricApiVersion = VersionUtils.modrinth("fabric-api", minecraftVersion).split("+")[0]
 
             // TODO: fix this to pull the correct neo version for the correct minecraft version
-            val neoForgeVersion = if (minecraftVersion == "1.20.2") "20.2.86" else VersionUtils.neoForge()
+            val neoForgeVersion = VersionUtils.neoForge()
 
             val templates = mutableMapOf(
                     "MOD_NAME" to modName,
@@ -166,7 +166,6 @@ class ModTemplateBuilder : AbstractNewProjectWizardBuilder() {
             addTemplateAsset("neoforge/build.gradle.kts", "NeoForge build.gradle.kts", templates)
             addTemplateAsset("neoforge/src/main/resources/${modid}.mixins.json", "NeoForge mod.mixins.json", templates)
             addTemplateAsset("neoforge/src/main/resources/META-INF/mods.toml", "mods.toml", templates)
-            addTemplateAsset("neoforge/src/main/resources/pack.mcmeta", "pack.mcmeta", templates)
             if (datagen) addTemplateAsset("neoforge/src/main/java/$groupPath/datagen/${className}DataGenerator.java", "ModDataGenerator.java", templates)
             addTemplateAsset("neoforge/run/options.txt", "options.txt", templates)
             addTemplateAsset("neoforge/run/eula.txt", "eula.txt", templates)

@@ -21,14 +21,14 @@ config = "${MOD_ID}.mixins.json"
 [[dependencies.${MOD_ID}]]
 modId = "neoforge"
 mandatory = true
-versionRange = "[20.2,)"
+versionRange = "[20.4,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.${MOD_ID}]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.20.2,)"
+versionRange = "[${MINECRAFT_VERSION},)"
 ordering = "NONE"
 side = "BOTH"
 

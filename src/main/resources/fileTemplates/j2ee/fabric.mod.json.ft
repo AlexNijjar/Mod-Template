@@ -30,8 +30,8 @@
         "${MOD_ID}.mixins.json"
     ],
     "depends": {
-        "fabric": "*",
-        "minecraft": ">=1.20",
+        "fabric-api": "*",
+        "minecraft": ">=${MINECRAFT_VERSION}",
         "java": ">=17"
 #if (${HAS_RESOURCEFUL_LIB})
         ,
